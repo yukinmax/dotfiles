@@ -1,0 +1,7 @@
+[user]
+	name = Maxim Yukin
+	email = maxim@yukin.me
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff
