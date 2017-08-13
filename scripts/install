@@ -105,6 +105,7 @@ brew_install_or_upgrade "pyenv-virtualenv"
 brew_install_or_upgrade "openssl"
 brew_install_or_upgrade "libyaml"
 brew_install_or_upgrade "apache-spark"
+brew_install_or_upgrade "exercism"
 # TODO: Create wrapper for brew cask
 brew cask install "java"
 

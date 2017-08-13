@@ -1,6 +1,6 @@
 set PATH $XDG_CONFIG_HOME/bin $PATH
 
-for file in git pyenv spark java
+for file in git pyenv spark java exercism
     source $XDG_CONFIG_HOME/fish/$file.fish
 end
 
