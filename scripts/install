@@ -74,7 +74,7 @@ download_font(){
 
 if ! command -v brew > /dev/null; then
   fancy_echo "Installing Homebrew..."
-  curl -fsS "https://raw.githubusercontent.com/Homebrew/install/master/install" | ruby
+  curl -fsS "https://raw.githubusercontent.com/Homebrew/install/master/install.sh" | /bin/bash
   export PATH="/usr/local/bin:$PATH"
 else
   fancy_echo "Homebrew already installed. Skipping..."
@@ -99,15 +99,15 @@ brew_install_or_upgrade "imagemagick"
 brew_install_or_upgrade "wget"
 brew_install_or_upgrade "fortune"
 brew_install_or_upgrade "python"
-brew_install_or_upgrade "python3"
 brew_install_or_upgrade "pyenv"
 brew_install_or_upgrade "pyenv-virtualenv"
 brew_install_or_upgrade "openssl"
 brew_install_or_upgrade "libyaml"
 brew_install_or_upgrade "apache-spark"
 brew_install_or_upgrade "exercism"
-# TODO: Create wrapper for brew cask
-brew cask install "java"
+brew_install_or_upgrade "lynx"
+brew_install_or_upgrade "pandoc"
+brew_install_or_upgrade "java"
 
 download_font "https://github.com/powerline/fonts/raw/fe396ef6f6b9b315f30af7d7229ff21f67a66e12/SourceCodePro/Source%20Code%20Pro%20Black%20for%20Powerline.otf"
 download_font "https://github.com/powerline/fonts/raw/fe396ef6f6b9b315f30af7d7229ff21f67a66e12/SourceCodePro/Source%20Code%20Pro%20Bold%20for%20Powerline.otf"
@@ -126,9 +126,8 @@ download_font "https://github.com/powerline/fonts/raw/fe396ef6f6b9b315f30af7d722
 
 fancy_echo "Fetching git submodules..."
 cd $dotfiles_root
-git submodule init
-git submodule update
+git submodule update --init --recursive
 
-fancy_echo "Updating python packages..."
-pip2 install --upgrade pip setuptools py4j
-pip3 install --upgrade pip setuptools py4j
+fancy_echo "Installing python versions"
+pyenv install -s 2.7.18
+pyenv install -s 3.8.6
