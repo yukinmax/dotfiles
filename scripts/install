@@ -45,19 +45,9 @@ brew_expand_alias() {
   brew info "$1" 2>/dev/null | head -1 | awk '{gsub(/:/, ""); print $1}'
 }
 
-brew_launchctl_restart() {
-  local name="$(brew_expand_alias "$1")"
-  local domain="homebrew.mxcl.$name"
-  local plist="$domain.plist"
-
+brew_service_restart() {
   fancy_echo "Restarting %s..." "$1"
-  mkdir -p "$HOME/Library/LaunchAgents"
-  ln -sfv "/usr/local/opt/$name/$plist" "$HOME/Library/LaunchAgents"
-
-  if launchctl list | grep -Fq "$domain"; then
-    launchctl unload "$HOME/Library/LaunchAgents/$plist" >/dev/null
-  fi
-  launchctl load "$HOME/Library/LaunchAgents/$plist" >/dev/null
+  brew services restart "$@" 2>/dev/null
 }
 
 download_font(){
@@ -85,10 +75,8 @@ brew update
 
 brew_install_or_upgrade "fish"
 brew_install_or_upgrade "git"
-brew_install_or_upgrade "postgres"
-brew_launchctl_restart "postgresql"
-brew_install_or_upgrade "redis"
-brew_launchctl_restart "redis"
+brew_install_or_upgrade "postgresql@14"
+brew_service_restart "postgresql@14"
 brew_install_or_upgrade "the_silver_searcher"
 brew_install_or_upgrade "vim"
 brew_install_or_upgrade "vimpager"
@@ -128,6 +116,8 @@ fancy_echo "Fetching git submodules..."
 cd $dotfiles_root
 git submodule update --init --recursive
 
-fancy_echo "Installing python versions"
+fancy_echo "Installing python versions..."
 pyenv install -s 2.7.18
-pyenv install -s 3.8.6
+pyenv install -s 3.9.13
+fancy_echo "Setting global python verions..."
+pyenv global 3.9.13 2.7.18
