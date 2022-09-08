@@ -62,6 +62,16 @@ download_font(){
   fi
 }
 
+if ! xcode-select -p > /dev/null; then
+  fancy_echo "Installing Apple Command Line Tools..."
+  xcode-select --install > /dev/null
+  while ! xcode-select -p > /dev/null; do
+    wait 10
+  done
+else
+  fancy_echo "Apple Command Line Tools already installed. Skipping..."
+fi
+
 if ! command -v brew > /dev/null; then
   fancy_echo "Installing Homebrew..."
   curl -fsS "https://raw.githubusercontent.com/Homebrew/install/master/install.sh" | /bin/bash
