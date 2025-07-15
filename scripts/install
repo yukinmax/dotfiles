@@ -83,6 +83,7 @@ fi
 fancy_echo "Updating Homebrew formulas..."
 brew update
 
+brew_install_or_upgrade "iterm2"
 brew_install_or_upgrade "fish"
 brew_install_or_upgrade "git"
 brew_install_or_upgrade "postgresql@14"
@@ -93,19 +94,21 @@ brew_install_or_upgrade "vimpager"
 brew_install_or_upgrade "ctags"
 brew_install_or_upgrade "tmux"
 brew_install_or_upgrade "reattach-to-user-namespace"
-brew_install_or_upgrade "imagemagick"
 brew_install_or_upgrade "wget"
 brew_install_or_upgrade "fortune"
-brew_install_or_upgrade "python"
 brew_install_or_upgrade "pyenv"
 brew_install_or_upgrade "pyenv-virtualenv"
+brew_install_or_upgrade "python-setuptools"
 brew_install_or_upgrade "openssl"
 brew_install_or_upgrade "libyaml"
-brew_install_or_upgrade "apache-spark"
 brew_install_or_upgrade "exercism"
 brew_install_or_upgrade "lynx"
 brew_install_or_upgrade "pandoc"
 brew_install_or_upgrade "java"
+brew_install_or_upgrade "gimp"
+brew_install_or_upgrade "drawio"
+brew_install_or_upgrade "freerdp"
+brew_install_or_upgrade "vlc"
 
 download_font "https://github.com/powerline/fonts/raw/fe396ef6f6b9b315f30af7d7229ff21f67a66e12/SourceCodePro/Source%20Code%20Pro%20Black%20for%20Powerline.otf"
 download_font "https://github.com/powerline/fonts/raw/fe396ef6f6b9b315f30af7d7229ff21f67a66e12/SourceCodePro/Source%20Code%20Pro%20Bold%20for%20Powerline.otf"
@@ -124,10 +127,12 @@ download_font "https://github.com/powerline/fonts/raw/fe396ef6f6b9b315f30af7d722
 
 fancy_echo "Fetching git submodules..."
 cd $dotfiles_root
+git submodule foreach --recursive git reset --hard
 git submodule update --init --recursive
 
 fancy_echo "Installing python versions..."
 pyenv install -s 2.7.18
 pyenv install -s 3.9.13
+pyenv install -s 3.11.6
 fancy_echo "Setting global python verions..."
 pyenv global 3.9.13 2.7.18
