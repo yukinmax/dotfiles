@@ -3,6 +3,7 @@ set runtimepath+=$XDG_CONFIG_HOME/vim
 
 " set up pathogen
 source $XDG_CONFIG_HOME/vim/bundle/vim-pathogen/autoload/pathogen.vim
+filetype off
 execute pathogen#infect()
 execute pathogen#helptags()
 
