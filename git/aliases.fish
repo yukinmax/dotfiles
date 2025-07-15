@@ -1,4 +1,5 @@
 alias gcp "git cherry-pick"
+alias ga "git add"
 alias gaa "git add ."
 alias gap "git add -p"
 alias gnap "git add -N .; and git add -p"
