@@ -1,0 +1,1 @@
+set -x PYTHON_COLORS 0
