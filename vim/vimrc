@@ -62,3 +62,6 @@ let g:ctrlp_working_path_mode = 0
 " disable visual mode
 map q: <Nop>
 nnoremap Q <Nop>
+
+" Set the maximum line length to match Ruff's default
+let g:pymode_options_max_line_length = 88
